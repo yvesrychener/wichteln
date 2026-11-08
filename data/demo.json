@@ -1,0 +1,42 @@
+{
+  "phase": "reveal",
+  "year": 2026,
+  "entries": {
+    "p1": {
+      "s": "H-Zc7frPFINZn3tKvLrxUg",
+      "i": 600000,
+      "iv": "jPbQ6n-6zXTqBsRL",
+      "ct": "wf_fGugP8nQVZKSdABMnkWEmipmAZ-iTUs64"
+    },
+    "p2": {
+      "s": "HpLw81_tQuI1rkiNL75gEg",
+      "i": 600000,
+      "iv": "7kCCZ6EPPu9wrhU6",
+      "ct": "j4f4hy2zE_cVr-nlR75roXWCN7YdeYbNwLCe"
+    },
+    "p3": {
+      "s": "3jYsVi2RXlTmXttqJ7Fz7A",
+      "i": 600000,
+      "iv": "ccC6TAYVAm4c6tSj",
+      "ct": "ZMPwsrd-breADXO7b7PmvZKnr1ED8fQs5ubN"
+    },
+    "p4": {
+      "s": "nAjrkjtX7sevxfaMLVW_kw",
+      "i": 600000,
+      "iv": "1lBFczD3rzB9fyrX",
+      "ct": "8ENNbo2uYqz57VcqM6-3VLNtptHSfI-H3RAa"
+    },
+    "p5": {
+      "s": "hDF0__6VmY8wkYtjLdR-hg",
+      "i": 600000,
+      "iv": "SdNK8pWq0WeqZJYM",
+      "ct": "A53FFfOanzBzc22v20CPZcvs1MEtK-o67xi-"
+    },
+    "p6": {
+      "s": "S5u2T1DPKAnZdIH2z_OIYw",
+      "i": 600000,
+      "iv": "mghiDpzFhyCSspbL",
+      "ct": "zU2EMCerulaufYtFlxLV3MXU3bq9RL00o9xM"
+    }
+  }
+}

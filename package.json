@@ -1,0 +1,15 @@
+{
+  "name": "wichtel-stube",
+  "private": true,
+  "type": "module",
+  "description": "Secret Santa for the family: static site + local organizer script.",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "demo": "node scripts/prepare-draw.mjs demo",
+    "check": "node scripts/prepare-draw.mjs check",
+    "draw": "node scripts/prepare-draw.mjs draw",
+    "register-mode": "node scripts/prepare-draw.mjs register",
+    "serve": "python3 -m http.server 8000"
+  },
+  "engines": { "node": ">=20" }
+}
