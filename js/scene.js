@@ -83,6 +83,9 @@ const GIFT_SVG = `<svg width="26" height="30" viewBox="-13 -42 26 30" aria-hidde
   <ellipse cx="-4.5" cy="-38" rx="5" ry="3" fill="#c7372f"/><ellipse cx="4.5" cy="-38" rx="5" ry="3" fill="#c7372f"/>
 </svg>`;
 
+// Resting spot of the travelling present (its box sits 24px below the element's top edge).
+const GIFT_HOME = `translate(${TREE_GIFT[0] - 13}px, ${TREE_GIFT[1] - 24}px)`;
+
 function restart(el, cls) {
   el.classList.remove(cls);
   void el.offsetWidth; // reflow so the animation plays again
@@ -113,7 +116,9 @@ export class Scene {
     this.gift = document.createElement('div');
     this.gift.className = 'giftfly';
     this.gift.innerHTML = `<div class="ghop"><div class="gin">${GIFT_SVG}</div></div>`;
-    this.gift.style.display = 'none';
+    // Hidden with visibility (not display) so it always has a rendered position under the tree to start from.
+    this.gift.style.visibility = 'hidden';
+    this.gift.style.transform = GIFT_HOME;
     this.layer.appendChild(this.gift);
     this.giftShown = false;
 
@@ -231,20 +236,18 @@ export class Scene {
     if (giftOn) {
       const owner = ph >= 7 ? r : g;
       const [ox, oy] = positions[owner];
-      this.gift.style.display = 'block';
-      if (!this.giftShown) {
-        // Park it under the tree first; the reflow in restart() commits that as the start of the transition.
-        this.gift.style.transitionDuration = '0s';
-        this.gift.style.transform = `translate(${TREE_GIFT[0] - 13}px, ${TREE_GIFT[1] - 24}px)`;
-        restart(this.gift.querySelector('.gin'), 'pop');
-      }
+      this.gift.style.visibility = 'visible';
+      if (!this.giftShown) restart(this.gift.querySelector('.gin'), 'pop');
       // Phase 3 is a quick hop from the tree into the giver's arms.
       this.gift.style.transitionDuration = s.instant ? '0s' : `${ph === 3 || ph >= 7 ? HANDOVER_SECONDS : WALK_SECONDS}s`;
       this.gift.style.transform = `translate(${ox - 13}px, ${oy - 70}px)`;
       if (ph === 7 && !this.gift.classList.contains('hop')) restart(this.gift, 'hop');
       if (ph !== 7) this.gift.classList.remove('hop');
     } else {
-      this.gift.style.display = 'none';
+      // Wait under the tree for the next reveal.
+      this.gift.style.visibility = 'hidden';
+      this.gift.style.transitionDuration = '0s';
+      this.gift.style.transform = GIFT_HOME;
       this.gift.classList.remove('hop');
     }
     this.giftShown = giftOn;
