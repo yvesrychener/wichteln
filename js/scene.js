@@ -1,7 +1,7 @@
 // The living-room scene: builds the six characters and the travelling present once,
 // then updates them from a small state object. Choreography runs on timers.
 
-import { PEOPLE, SEATS, MEET, STEPS, WALK_SECONDS, HANDOVER_SECONDS } from './config.js';
+import { PEOPLE, SEATS, MEET, TREE_GIFT, STEPS, WALK_SECONDS, HANDOVER_SECONDS } from './config.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const reduceMotion = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -232,8 +232,14 @@ export class Scene {
       const owner = ph >= 7 ? r : g;
       const [ox, oy] = positions[owner];
       this.gift.style.display = 'block';
-      if (!this.giftShown) restart(this.gift.querySelector('.gin'), 'pop');
-      this.gift.style.transitionDuration = s.instant ? '0s' : `${ph >= 7 ? HANDOVER_SECONDS : WALK_SECONDS}s`;
+      if (!this.giftShown) {
+        // Park it under the tree first; the reflow in restart() commits that as the start of the transition.
+        this.gift.style.transitionDuration = '0s';
+        this.gift.style.transform = `translate(${TREE_GIFT[0] - 13}px, ${TREE_GIFT[1] - 24}px)`;
+        restart(this.gift.querySelector('.gin'), 'pop');
+      }
+      // Phase 3 is a quick hop from the tree into the giver's arms.
+      this.gift.style.transitionDuration = s.instant ? '0s' : `${ph === 3 || ph >= 7 ? HANDOVER_SECONDS : WALK_SECONDS}s`;
       this.gift.style.transform = `translate(${ox - 13}px, ${oy - 70}px)`;
       if (ph === 7 && !this.gift.classList.contains('hop')) restart(this.gift, 'hop');
       if (ph !== 7) this.gift.classList.remove('hop');

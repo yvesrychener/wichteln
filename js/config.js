@@ -21,6 +21,9 @@ export const SEATS = [[44, 452], [94, 514], [160, 552], [230, 552], [296, 514], 
 // Front meeting spots for the handover.
 export const MEET = { y: 590, left: 140, right: 250 };
 
+// Where the travelling present starts: on the floor among the presents under the tree.
+export const TREE_GIFT = [195, 396];
+
 // Reveal choreography: [ms after start, phase]
 // 2 giver stands, 3 present appears, 4 giver walks to the front, 5 recipient jumps up,
 // 6 recipient walks to the front, 7 handover, 8 message
